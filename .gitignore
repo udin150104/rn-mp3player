@@ -3,6 +3,11 @@
 .AppleDouble
 .LSOverride
 Icon
+
+*.jsbundle
+.bundle/
+
+
 ._*
 .Spotlight-V100
 .Trashes
