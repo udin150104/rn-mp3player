@@ -1,0 +1,1 @@
+/home/syahrudin/Programming/node/mp3player/android/app/build/intermediates/cxx/RelWithDebInfo/305h1i1c/obj/x86
