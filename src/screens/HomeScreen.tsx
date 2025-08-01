@@ -90,6 +90,7 @@ const HomeScreen = () => {
         files={mp3Files}
         onRescan={scanMp3Files}
         onPlay={(fp: string) => {
+          // console.log(mp3Files);
           setPlaylistAndPlay(mp3Files, mp3Files.indexOf(fp));
         }}
         onPause={pause}

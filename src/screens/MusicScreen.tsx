@@ -12,6 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { debounce } from 'lodash';
 import { useMusicPlayer } from '../context/MusicPlayerContext';
 
+
 const MusicScreen = () => {
   const {
     currentFile,
@@ -135,6 +136,7 @@ const MusicScreen = () => {
       </View>
 
       <Text style={styles.nowPlaying}>
+        {/* {console.log(currentFile)} */}
         {currentFile ? currentFile.split('/').pop() : 'Tidak ada lagu diputar'}
       </Text>
 
@@ -166,6 +168,19 @@ const MusicScreen = () => {
         />
         <Text style={{ color: '#8b8b8bff' }}>{duration > 0 ? formatTime(duration) : '00:00'}</Text>
       </View>
+
+      {currentFile ? (
+        <View style={styles.trackInfo}>
+          <Pressable style={styles.trackItem} onPress={handlePrevious}>
+            <Ionicons name="play-skip-back-outline" size={18} color="#888" />
+            <Text style={styles.trackText}>{truncate(getPrevTitle() ?? '-', 40)}</Text>
+          </Pressable>
+          <Pressable style={styles.trackItem} onPress={handleNext}>
+            <Ionicons name="play-skip-forward-outline" size={18} color="#888" />
+            <Text style={styles.trackText}>{truncate(getNextTitle() ?? '-', 40)}</Text>
+          </Pressable>
+        </View>
+      ) : null}
 
       <View style={styles.controls}>
         <Pressable onPress={handlePrevious} style={styles.controlButton}>
@@ -209,18 +224,6 @@ const MusicScreen = () => {
           />
         </Pressable>
       </View>
-      {currentFile ? (
-        <View style={styles.trackInfo}>
-          <Pressable style={styles.trackItem} onPress={handlePrevious}>
-            <Ionicons name="play-skip-back-outline" size={18} color="#888" />
-            <Text style={styles.trackText}>{truncate(getPrevTitle() ?? '-', 40)}</Text>
-          </Pressable>
-          <Pressable style={styles.trackItem} onPress={handleNext}>
-            <Ionicons name="play-skip-forward-outline" size={18} color="#888" />
-            <Text style={styles.trackText}>{truncate(getNextTitle() ?? '-', 40)}</Text>
-          </Pressable>
-        </View>
-      ) : null}
     </View>
   );
 };

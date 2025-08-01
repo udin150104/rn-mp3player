@@ -78,7 +78,7 @@ const SongList = ({
     <View>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.title}>Daftar Lagu</Text>
+        <Text style={styles.title}>Daftar Lagu {files.length}</Text>
         <Pressable
           onPress={onRescan}
           style={styles.rescanButton}
@@ -108,6 +108,7 @@ const SongList = ({
 
             return (
               <View key={index} style={styles.songItem}>
+                <Text style={{fontSize:10,color:'#7a7a7aff'}}> {index+1}</Text>
                 {/* Play/Pause/Resume Button */}
                 <Pressable
                   onPress={() => {
@@ -121,7 +122,7 @@ const SongList = ({
                   disabled={showLoading}
                 >
                   {showLoading ? (
-                    <Ionicons name="time-outline" size={35} color="#aaa" />
+                    <Ionicons name="time-outline" size={35} color="#7a7a7aff" />
                   ) : (
                     <Ionicons
                       name={
@@ -150,7 +151,7 @@ const SongList = ({
                     <MarqueeText text={fileName} />
                   ) : (
                     <Text style={styles.songName} numberOfLines={1}>
-                      {fileName}
+                      {fileName} 
                     </Text>
                   )}
                   {isPlaying && (

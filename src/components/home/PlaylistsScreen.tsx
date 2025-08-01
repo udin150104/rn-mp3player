@@ -30,7 +30,7 @@ const PlaylistsScreen = ({ allSongs }: { allSongs: string[] }) => {
   const [confirmDeleteVisible, setConfirmDeleteVisible] = useState(false);
   const [pendingDeleteName, setPendingDeleteName] = useState<string | null>(null);
 
-  const { playAtIndex, setPlaylist, currentFile } = useMusicPlayer();
+  const { playAtIndex, setPlaylist,setPlaylistAndPlay, currentFile } = useMusicPlayer();
 
   useEffect(() => { loadPlaylists(); }, []);
 
@@ -105,9 +105,12 @@ const PlaylistsScreen = ({ allSongs }: { allSongs: string[] }) => {
 
   const playSongInPlaylist = (songIndex: number) => {
     const playlist = playlists.find((p) => p.name === selectedPlaylistName);
+    // console.log(playlist);
     if (!playlist) return;
     setPlaylist(playlist.songs);
-    playAtIndex(songIndex);
+    // playAtIndex(songIndex);
+    
+    setPlaylistAndPlay(playlist.songs, songIndex);
   };
 
   const openRenameModal = (playlistName: string) => {
@@ -176,7 +179,8 @@ const PlaylistsScreen = ({ allSongs }: { allSongs: string[] }) => {
       <Modal visible={confirmDeleteVisible} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={styles.modalBox}>
-            <Text style={[styles.modalTitle, { color: '#949393ff' }]}>Hapus playlist {pendingDeleteName}?</Text>
+            <Text style={[styles.modalTitle, { color: '#949393ff' }]}>Hapus playlist</Text>
+            <Text style={[styles.modalTitle, { color: '#c5032d', fontSize:12, marginVertical:20, paddingBottom:20 }]}>Anda yakin ingin hapus playlist {pendingDeleteName}?</Text>
             <View style={styles.modalButtons}>
               <Pressable onPress={() => setConfirmDeleteVisible(false)}>
                 <Text style={styles.cancel}>Batal</Text>
@@ -256,10 +260,11 @@ const PlaylistsScreen = ({ allSongs }: { allSongs: string[] }) => {
               ListEmptyComponent={
                 <Text style={{ textAlign: 'center', color: '#999' }}>Tidak ada lagu tersedia</Text>
               }
-              style={{ maxHeight: 300 }}
+              style={{ maxHeight: 300,borderBottomWidth:1, borderBottomColor:'#c4c4c4ff',paddingBottom:20 }}
             />
-            <Pressable onPress={() => setSongModalVisible(false)} style={{ marginTop: 10 }}>
-              <Ionicons name="close" size={28} color="#999" style={{ textAlign: 'center' }} />
+            <Pressable onPress={() => setSongModalVisible(false)} style={{ marginTop: 10, flexDirection:'row', alignContent:'center',alignItems:'center', alignSelf:'center' }}>
+              <Text><Ionicons name="close" size={28} color="#c4c4c4ff" style={{ textAlign: 'center' }} /></Text>
+              <Text style={{color:"#c4c4c4ff", fontSize:18}}>Tutup</Text>
             </Pressable>
           </View>
         </View>
@@ -300,11 +305,12 @@ const PlaylistsScreen = ({ allSongs }: { allSongs: string[] }) => {
                   </View>
                 );
               }}
-              ListEmptyComponent={<Text style={{ textAlign: 'center', color: '#999' }}>Tidak ada lagu</Text>}
-              style={{ maxHeight: 300 }}
+              ListEmptyComponent={<Text style={{ textAlign: 'center', color: '#c4c4c4ff' }}>Tidak ada lagu</Text>}
+              style={{ maxHeight: 300,borderBottomWidth:1, borderBottomColor:'#c4c4c4ff',paddingBottom:20 }}
             />
-            <Pressable onPress={() => setPlaylistSongsModalVisible(false)} style={{ marginTop: 10 }}>
-              <Ionicons name="close" size={28} color="#999" style={{ textAlign: 'center' }} />
+            <Pressable onPress={() => setPlaylistSongsModalVisible(false)} style={{ marginTop: 10, flexDirection:'row', alignContent:'center',alignItems:'center', alignSelf:'center' }}>
+              <Text><Ionicons name="close" size={28} color="#c4c4c4ff" style={{ textAlign: 'center' }} /></Text>
+              <Text style={{color:"#c4c4c4ff", fontSize:18}}>Tutup</Text>
             </Pressable>
           </View>
         </View>

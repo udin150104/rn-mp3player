@@ -10,7 +10,16 @@ interface TabBarProps {
 
 const TabBar = ({ activeTab, setActiveTab }: TabBarProps) => (
   <View style={styles.container}>
-    <Pressable onPress={() => setActiveTab('Lagu')} style={styles.row}>
+    <Pressable onPress={() => setActiveTab('Lagu')}  style={({ pressed }) => [
+    {
+      backgroundColor: pressed ? '#bdbdbdff' : 'transparent',
+      transform: [{ scale: pressed ? 0.96 : 1 }],
+    },
+    {
+      backgroundColor : activeTab=== 'Lagu'? '#dbdbdbff': 'transparent',
+    },
+    styles.row
+  ]}>
       <Ionicons
         name="musical-note-outline"
         size={18}
@@ -21,7 +30,16 @@ const TabBar = ({ activeTab, setActiveTab }: TabBarProps) => (
       </Text>
     </Pressable>
 
-    <Pressable onPress={() => setActiveTab('Playlists')} style={styles.row}>
+    <Pressable onPress={() => setActiveTab('Playlists')} style={({ pressed }) => [
+    {
+      backgroundColor: pressed ? '#bdbdbdff' : 'transparent',
+      transform: [{ scale: pressed ? 0.96 : 1 }],
+    },
+    {
+      backgroundColor : activeTab === 'Playlists'? '#dbdbdbff': 'transparent',
+    },
+    styles.row
+  ]}>
       <Entypo
         name="folder-music"
         size={18}
@@ -36,7 +54,7 @@ const TabBar = ({ activeTab, setActiveTab }: TabBarProps) => (
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 0,
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: '#e4e4e4ff',
@@ -45,6 +63,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5,
+    padding:20,
+    margin:8,
+    borderRadius:20
   },
   text: {
     fontSize: 16,

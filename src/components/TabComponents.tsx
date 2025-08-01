@@ -12,7 +12,7 @@ function TabComponents({ state, descriptors, navigation }) {
   const { colors } = useTheme();
   const { buildHref } = useLinkBuilder();
 
-  console.log(state);
+  // console.log(state);
 
   return (
     <View style={styles.tabContainer}>
