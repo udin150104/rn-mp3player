@@ -173,7 +173,7 @@ const PlaylistsScreen = ({ allSongs }: { allSongs: string[] }) => {
         renderItem={renderItem}
         keyExtractor={(item) => item.name}
         ListEmptyComponent={<Text style={styles.empty}>Belum ada playlist</Text>}
-        contentContainerStyle={{ paddingBottom: 40 }}
+        contentContainerStyle={{ paddingBottom: 250 }}
       />
 
       <Modal visible={confirmDeleteVisible} transparent animationType="fade">
